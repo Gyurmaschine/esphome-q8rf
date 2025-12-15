@@ -256,6 +256,7 @@ namespace esphome
 
     void Q8RFController::read_cc_register(uint8_t reg, uint8_t *value)
     {
+      ESP_LOGD(TAG, "Attempting to read register: 0x%02x", reg);
       this->enable();
       this->transfer_byte(reg);
       *value = this->transfer_byte(0);
