@@ -196,7 +196,10 @@ namespace esphome
       this->read_cc_register(REG_VERSION, &version);
 
       ESP_LOGI(TAG, "CC1101 found with partnum: %02x and version: %02x", partnum, version);
-
+      if (partnum == 0x00 && version == 0x00) {
+          ESP_LOGE(TAG, "CC1101 returned 0x00/0x00. Check SPI wiring (MISO/MOSI/CLK/CSN) and power (3.3V/GND)! ");
+          return false;
+      }
       // Setup config registers
       uint8_t verify_value;
       for (int i = 0; i < sizeof(Q8RF_REG_CONFIG); i += 2)
