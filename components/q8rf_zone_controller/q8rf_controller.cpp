@@ -89,14 +89,14 @@ namespace esphome
       {
         for (int p = 0; p < pad_to_length - binary_len; p++)
         {
-          strncpy(*dest, Q8RF_ZERO_BIT_DATA, strlen(Q8RF_ZERO_BIT_DATA));
+          memcpy(*dest, Q8RF_ZERO_BIT_DATA, strlen(Q8RF_ZERO_BIT_DATA));
           *dest += strlen(Q8RF_ZERO_BIT_DATA);
         }
       }
 
       for (int b = 0; b < binary_len; b++)
       {
-        strncpy(*dest, binary[b] == '1' ? Q8RF_ONE_BIT_DATA : Q8RF_ZERO_BIT_DATA, strlen(Q8RF_ONE_BIT_DATA));
+        memcpy(*dest, binary[b] == '1' ? Q8RF_ONE_BIT_DATA : Q8RF_ZERO_BIT_DATA, strlen(Q8RF_ONE_BIT_DATA));
         *dest += strlen(Q8RF_ZERO_BIT_DATA);
       }
     }
@@ -109,7 +109,7 @@ namespace esphome
 
       // Preamble
       char *preamble_start = cursor;
-      strncpy(cursor, Q8RF_PREAMBLE_DATA, strlen(Q8RF_PREAMBLE_DATA));
+      memcpy(cursor, Q8RF_PREAMBLE_DATA, strlen(Q8RF_PREAMBLE_DATA));
       cursor += strlen(Q8RF_PREAMBLE_DATA);
 
       char *payload_start = cursor;
@@ -136,15 +136,15 @@ namespace esphome
       encode_bits(cmd, 8, &cursor);
 
       // Repeat the command once more
-      strncpy(cursor, payload_start, cursor - payload_start);
+      memcpy(cursor, payload_start, cursor - payload_start);
       cursor += cursor - payload_start;
 
       // Add a gap
-      strncpy(cursor, Q8RF_GAP_DATA, strlen(Q8RF_GAP_DATA));
+      memcpy(cursor, Q8RF_GAP_DATA, strlen(Q8RF_GAP_DATA));
       cursor += strlen(Q8RF_GAP_DATA);
 
       // Repeat the whole burst
-      strncpy(cursor, preamble_start, cursor - preamble_start);
+      memcpy(cursor, preamble_start, cursor - preamble_start);
       cursor += cursor - preamble_start;
 
       // Convert msg to bytes

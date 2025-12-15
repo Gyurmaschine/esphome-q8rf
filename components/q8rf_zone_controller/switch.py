@@ -15,24 +15,19 @@ CONF_Q8RF_RESEND_INTERVAL = "q8rf_resend_interval"
 CONF_Q8RF_TURN_ON_WATCHDOG_INTERVAL = "q8rf_turn_on_watchdog_interval"
 
 q8rf_ns = cg.esphome_ns.namespace("q8rf")
-q8rf_SWITCH = q8rf_ns.class_("Q8RFSwitch", switch.Switch, cg.Component)
+Q8RFSwitch = q8rf_ns.class_("Q8RFSwitch", switch.Switch, cg.PollingComponent)
 
 CONFIG_SCHEMA = (
-    switch.SWITCH_SCHEMA.extend({
-        cv.GenerateID(): cv.declare_id(q8rf_SWITCH),
-        cv.GenerateID(CONF_Q8RFController_ID): cv.use_id(Q8RFController),
-    }
-    )
-    .extend(cv.COMPONENT_SCHEMA)
+    switch.switch_schema(Q8RFSwitch)
+    .extend(cv.polling_component_schema("1s"))
     .extend(
-        cv.Schema(
-            {
-                cv.Required(CONF_Q8RF_DEVICE_ID): cv.hex_uint16_t,
-                cv.Required(CONF_Q8RF_ZONE_ID): cv.int_range(min=1, max=4),
-                cv.Optional(CONF_Q8RF_RESEND_INTERVAL): cv.uint32_t,
-                cv.Optional(CONF_Q8RF_TURN_ON_WATCHDOG_INTERVAL): cv.uint32_t
-            }
-        )
+        cv.Schema({
+            cv.GenerateID(CONF_Q8RFController_ID): cv.use_id(Q8RFController),
+            cv.Required(CONF_Q8RF_DEVICE_ID): cv.hex_uint16_t,
+            cv.Required(CONF_Q8RF_ZONE_ID): cv.int_range(min=1, max=4),
+            cv.Optional(CONF_Q8RF_RESEND_INTERVAL): cv.uint32_t,
+            cv.Optional(CONF_Q8RF_TURN_ON_WATCHDOG_INTERVAL): cv.uint32_t
+        })
     )
 )
 
