@@ -1,7 +1,7 @@
 #pragma once
 
 #include "esphome/core/component.h"
-#include "esphome/components/button/button.h"
+#include "esphome/components/button/button_component.h"
 #include "q8rf_controller.h"
 
 namespace esphome
@@ -9,7 +9,7 @@ namespace esphome
   namespace q8rf
   {
 
-    class Q8RFButton : public button::Button, public Component
+    class Q8RFButton : public button::ButtonComponent, public Component
     {
       static const uint8_t Q8RF_MSG_CMD_PAIR = 0x00;
 
