@@ -1,34 +1,31 @@
 #pragma once
 
 #include "esphome/core/component.h"
-#include "esphome/components/button/button_component.h"
+#include "esphome/components/button/button.h"
 #include "q8rf_controller.h"
 
-namespace esphome
-{
-  namespace q8rf
-  {
+namespace esphome {
+namespace q8rf {
 
-    class Q8RFButton : public button::ButtonComponent, public Component
-    {
-      static const uint8_t Q8RF_MSG_CMD_PAIR = 0x00;
+class Q8RFButton : public button::Button, public Component {
+ protected:
+  static const uint8_t Q8RF_MSG_CMD_PAIR = 0x00;
 
-    protected:
-      uint16_t q8rf_device_id_ = 0;
-      uint16_t q8rf_zone_id_ = 0;
-      uint8_t msg_pair_[45];
-      Q8RFController *controller_;
-      bool initialized_ = false;
+  uint16_t q8rf_device_id_{0};
+  uint16_t q8rf_zone_id_{0};
+  uint8_t msg_pair_[45];
+  Q8RFController *controller_{nullptr};
+  bool initialized_{false};
 
-    public:
-      void set_q8rf_device_id(uint16_t id);
-      void set_q8rf_zone_id(uint16_t id);
-      void set_controller(Q8RFController *controller);
+ public:
+  void set_q8rf_device_id(uint16_t id);
+  void set_q8rf_zone_id(uint16_t id);
+  void set_controller(Q8RFController *controller);
 
-      void press_action() override;
-      void setup() override;
-      void dump_config() override;
-    };
+  void press_action() override;
+  void setup() override;
+  void dump_config() override;
+};
 
-  } // namespace q8rf
-} // namespace esphome
+}  // namespace q8rf
+}  // namespace esphome
