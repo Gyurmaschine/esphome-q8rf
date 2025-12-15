@@ -1,5 +1,5 @@
 #include "esphome/core/log.h"
-//#include "q8rf_button.h"
+#include "q8rf_button.h"
 #include "esphome/components/button/button_component.h"
 
 namespace esphome
