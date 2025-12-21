@@ -16,7 +16,7 @@ namespace esphome
     static const char *Q8RF_ONE_BIT_DATA = "001";
     static const char *Q8RF_GAP_DATA = "000";
 
-    static const uint8_t Q8RF_MSG_CMD_PAIR = 0x00;
+    static const uint8_t Q8RF_MSG_CMD_PAIR = 0x44;
 
     static const uint8_t CMD_SRES = 0x30;
     static const uint8_t CMD_STX = 0x35;

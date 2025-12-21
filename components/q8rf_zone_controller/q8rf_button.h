@@ -9,7 +9,7 @@ namespace q8rf {
 
 class Q8RFButton : public button::Button, public Component {
  protected:
-  static const uint8_t Q8RF_MSG_CMD_PAIR = 0x00;
+  static const uint8_t Q8RF_MSG_CMD_PAIR = 0x44;
 
   uint16_t q8rf_device_id_{0};
   uint16_t q8rf_zone_id_{0};

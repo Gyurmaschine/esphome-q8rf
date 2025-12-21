@@ -22,14 +22,14 @@ namespace esphome
       unsigned long last_msg_time_ = 0;
       unsigned long last_turn_on_time_ = 0;
       bool initialized_ = false;
-      uint32_t q8rf_resend_interval_ = 600000;
+      uint32_t q8rf_resend_interval_ = 30000;
       uint32_t q8rf_turn_on_watchdog_interval_ = 0;
 
-      static const uint8_t Q7RF_MSG_CMD_TURN_ON_HEATING = 0xFF;
-      static const uint8_t Q7RF_MSG_CMD_TURN_OFF_HEATING = 0x0F;
+      static const uint8_t Q7RF_MSG_CMD_TURN_ON_HEATING = 0xEE;
+      static const uint8_t Q7RF_MSG_CMD_TURN_OFF_HEATING = 0x00;
 
     public:
-      Q8RFSwitch() : PollingComponent(60000) {}
+      Q8RFSwitch() : PollingComponent(30000) {}
       void set_q8rf_device_id(uint16_t id);
       void set_q8rf_zone_id(uint16_t id);
       void set_q8rf_turn_on_watchdog_interval(uint32_t interval);
